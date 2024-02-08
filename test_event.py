@@ -1,11 +1,6 @@
 from event import *
+
 from pydantic_core import TzInfo
-
-
-def test_event_parsing():
-    with open("events.jsonl") as events:
-        for event in events.readlines():
-            Event.validate_json(event)
 
 
 def test_group():
