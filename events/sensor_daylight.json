@@ -1,0 +1,15 @@
+{
+    "e": "changed",
+    "id": "1",
+    "r": "sensors",
+    "state": {
+        "dark": true,
+        "daylight": false,
+        "lastupdated": "2024-02-04T15:56:28.054",
+        "status": 200,
+        "sunrise": "2024-02-04T07:11:09",
+        "sunset": "2024-02-04T15:43:23"
+    },
+    "t": "event",
+    "uniqueid": "00:21:2e:ff:ff:0c:a0:94-01"
+}

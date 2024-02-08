@@ -1,0 +1,13 @@
+{
+    "config": {
+        "alert": "none",
+        "battery": 87,
+        "on": true,
+        "reachable": true
+    },
+    "e": "changed",
+    "id": "7",
+    "r": "sensors",
+    "t": "event",
+    "uniqueid": "cc:86:ec:ff:fe:9f:de:4a-01-1000"
+}

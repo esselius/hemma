@@ -1,0 +1,11 @@
+{
+    "e": "changed",
+    "id": "7",
+    "r": "sensors",
+    "state": {
+        "buttonevent": 2003,
+        "lastupdated": "2024-02-06T20:43:35.495"
+    },
+    "t": "event",
+    "uniqueid": "cc:86:ec:ff:fe:9f:de:4a-01-1000"
+}

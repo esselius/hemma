@@ -1,0 +1,98 @@
+{
+    "e": "added",
+    "id": "2",
+    "light": {
+        "capabilities": {
+            "alerts": [
+                "none",
+                "select",
+                "lselect",
+                "blink",
+                "breathe",
+                "okay",
+                "channelchange",
+                "finish",
+                "stop"
+            ],
+            "bri": {
+                "min_dim_level": 0
+            },
+            "color": {
+                "ct": {
+                    "computes_xy": true,
+                    "max": 65279,
+                    "min": 0
+                },
+                "gamut_type": null,
+                "modes": [],
+                "xy": {
+                    "blue": [
+                        0,
+                        0
+                    ],
+                    "green": [
+                        0,
+                        0
+                    ],
+                    "red": [
+                        0,
+                        0
+                    ]
+                }
+            }
+        },
+        "colorcapabilities": 0,
+        "config": {
+            "bri": {
+                "startup": "previous"
+            },
+            "color": {
+                "ct": {
+                    "startup": 336
+                },
+                "xy": {
+                    "startup": [
+                        0,
+                        0
+                    ]
+                }
+            },
+            "groups": [],
+            "on": {
+                "startup": "previous"
+            }
+        },
+        "ctmax": 65279,
+        "ctmin": 0,
+        "etag": "b3f7e5259da6b2a7ed5027981bdf0bbc",
+        "hascolor": true,
+        "lastannounced": null,
+        "lastseen": "2024-02-08T11:49Z",
+        "manufacturername": "Signify Netherlands B.V.",
+        "modelid": "LCT012",
+        "name": "Extended color light 2",
+        "productid": null,
+        "state": {
+            "alert": "none",
+            "bri": 0,
+            "colormode": "hs",
+            "ct": 0,
+            "effect": "none",
+            "hue": 0,
+            "on": false,
+            "reachable": false,
+            "sat": 0,
+            "xy": [
+                0,
+                0
+            ]
+        },
+        "swconfigid": null,
+        "swversion": null,
+        "type": "Extended color light",
+        "uniqueid": "00:17:88:01:03:7e:3d:7e-0b"
+    },
+    "r": "lights",
+    "t": "event",
+    "uniqueid": "00:17:88:01:03:7e:3d:7e-0b"
+}

@@ -14,7 +14,7 @@ class Base(MyBase):
     id: int
 
 
-class PingAttr(MyBase):
+class HeartbeatAttr(MyBase):
     id: int
     lastannounced: Optional[datetime] = None
     lastseen: datetime
@@ -31,8 +31,8 @@ class PingAttr(MyBase):
     swconfigid: Optional[str] = None
 
 
-class Ping(Base):
-    attr: PingAttr
+class Heartbeat(Base):
+    attr: HeartbeatAttr
     uniqueid: str
 
 
@@ -51,7 +51,7 @@ class LightState(MyBase):
     ct: Optional[int] = None
     effect: Optional[str] = None
     sat: Optional[int] = None
-    xy: Optional[List[int]] = None
+    xy: Optional[List[float]] = None
     hue: Optional[int] = None
 
 
@@ -170,15 +170,22 @@ class DaylightSensor(SensorBase):
     state: DaylightSensorState
 
 
+class GroupBase(Base):
+    r: Literal["groups"]
+    e: Literal["changed"]
+
+
 class GroupState(MyBase):
     all_on: bool
     any_on: bool
 
 
-class GroupStateChange(Base):
-    r: Literal["groups"]
-    e: Literal["changed"]
+class GroupStateChange(GroupBase):
     state: GroupState
+
+
+class GroupRename(GroupBase):
+    name: str
 
 
 Event = TypeAdapter(
@@ -187,12 +194,13 @@ Event = TypeAdapter(
         SensorButton,
         TempHumiditySensor,
         SensorBattery,
-        Ping,
+        Heartbeat,
         LightConfig,
         LightAdded,
         ButtonConfig,
         DaylightSensor,
         LightStateChange,
         GroupStateChange,
+        GroupRename,
     ]
 )

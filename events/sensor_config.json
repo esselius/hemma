@@ -1,0 +1,13 @@
+{
+    "config": {
+        "clickmode": "rocker",
+        "devicemode": "compatibility",
+        "on": true,
+        "reachable": true
+    },
+    "e": "changed",
+    "id": "3",
+    "r": "sensors",
+    "t": "event",
+    "uniqueid": "54:ef:44:10:00:71:43:55-29-0012"
+}

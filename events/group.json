@@ -1,0 +1,10 @@
+{
+    "e": "changed",
+    "id": "3",
+    "r": "groups",
+    "state": {
+        "all_on": false,
+        "any_on": false
+    },
+    "t": "event"
+}

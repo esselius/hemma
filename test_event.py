@@ -16,6 +16,12 @@ def test_group():
     ) == Event.validate_json(open("events/group.json").read())
 
 
+def test_group_rename():
+    assert GroupRename(
+        e="changed", r="groups", t="event", id=3, name="Bibliotek"
+    ) == Event.validate_json(open("events/group_rename.json").read())
+
+
 light_changed = {
     "e": "changed",
     "t": "event",
@@ -24,11 +30,11 @@ light_changed = {
 
 
 def test_light_announcement():
-    assert Ping(
+    assert Heartbeat(
         **light_changed,
         id=2,
         uniqueid="00:17:88:01:03:7e:3d:7e-0b",
-        attr=PingAttr(
+        attr=HeartbeatAttr(
             colorcapabilities=31,
             ctmax=500,
             ctmin=153,
@@ -139,11 +145,11 @@ def test_light_config():
 
 
 def test_light_heartbeat():
-    assert Ping(
+    assert Heartbeat(
         **light_changed,
         id=3,
         uniqueid="54:ef:44:10:00:71:43:55-01",
-        attr=PingAttr(
+        attr=HeartbeatAttr(
             id="3",
             lastannounced=datetime(2024, 1, 8, 17, 28, 42, tzinfo=TzInfo(0)),
             lastseen=datetime(2024, 2, 6, 20, 46, tzinfo=TzInfo(0)),
@@ -182,6 +188,29 @@ def test_light_off():
             reachable=True,
         )
     ) == Event.validate_json(open("events/light_off.json").read())
+
+
+def test_light_color():
+    assert LightStateChange(
+        **light_changed,
+        id=2,
+        uniqueid="00:17:88:01:03:7e:3d:7e-0b",
+        state=LightState(
+            alert="none",
+            bri=31,
+            colormode="xy",
+            ct=0,
+            effect="none",
+            hue=8417,
+            on=True,
+            reachable=True,
+            sat=140,
+            xy=[
+                0.4082,
+                0.4289
+            ]
+        )
+    ) == Event.validate_json(open("events/light_color.json").read())
 
 
 sensor_changed = {
@@ -244,11 +273,11 @@ def test_sensor_daylight():
 
 
 def test_sensor_heartbeat():
-    assert Ping(
+    assert Heartbeat(
         **sensor_changed,
         id=3,
         uniqueid="54:ef:44:10:00:71:43:55-29-0012",
-        attr=PingAttr(
+        attr=HeartbeatAttr(
             id=3,
             lastannounced=datetime(2024, 1, 8, 17, 28, 42, tzinfo=TzInfo(0)),
             lastseen=datetime(2024, 2, 6, 20, 46, tzinfo=TzInfo(0)),
