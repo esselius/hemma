@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Literal, Optional, Union
+from typing import Any, List, Literal, Optional, Union
 from pydantic import BaseModel, TypeAdapter
 
 class MyBase(BaseModel, extra='forbid'):
@@ -7,11 +7,13 @@ class MyBase(BaseModel, extra='forbid'):
 
 class Base(MyBase):
     t: Literal['event']
-    id: str
+    r: str
+    e: str
+    id: int
 
 class PingAttr(MyBase):
     id: int
-    lastannounced: datetime
+    lastannounced: Optional[datetime] = None
     lastseen: datetime
     manufacturername: str
     modelid: str
@@ -20,10 +22,18 @@ class PingAttr(MyBase):
     type: str
     uniqueid: str
     productid: Optional[str] = None
+    colorcapabilities: Optional[int] = None
+    ctmax: Optional[int] = None
+    ctmin: Optional[int] = None
+    swconfigid: Optional[str] = None
+
+class Ping(Base):
+    attr: PingAttr
+    uniqueid: str
 
 class LightBase(Base):
     r: Literal['lights']
-    e: Literal['changed']
+    e: Literal['added', 'changed']
     uniqueid: str
 
 class LightState(MyBase):
@@ -31,12 +41,52 @@ class LightState(MyBase):
     on: bool
     reachable: bool
     bri: Optional[int] = None
+    colormode: Optional[str] = None
+    ct: Optional[int] = None
+    effect: Optional[str] = None
+    sat: Optional[int] = None
+    xy: Optional[List[int]] = None
+    hue: Optional[int] = None
 
 class LightStateChange(LightBase):
     state: LightState
 
-class LightPing(LightBase):
-    attr: PingAttr
+class LightStartupConfig(MyBase):
+    bri: Any
+    color: Any
+    on: Any
+    groups: Optional[List] = None
+
+class LightConfig(LightBase):
+    config: LightStartupConfig
+
+class LightCapabilities(MyBase):
+    alerts: List[str]
+    bri: Any
+    color: Any
+
+class LightAddDump(MyBase):
+    capabilities: LightCapabilities
+    colorcapabilities: int
+    config: LightStartupConfig
+    ctmax: int
+    ctmin: int
+    etag: str
+    hascolor: bool
+    lastannounced: Optional[datetime] = None
+    lastseen: datetime
+    manufacturername: str
+    modelid: str
+    name: str
+    productid: Optional[str] = None
+    state: LightState
+    swconfigid: Optional[str] = None
+    swversion: Optional[str] = None
+    type: str
+    uniqueid: str
+
+class LightAdded(LightBase):
+    light: LightAddDump
 
 class SensorBase(Base):
     r: Literal['sensors']
@@ -50,7 +100,7 @@ class ButtonState(MyBase):
     buttonevent: int
     lastupdated: datetime
 
-class SensorButtonEvent(SensorBase):
+class SensorButton(SensorBase):
     state: ButtonState
 
 class SensorButtonConfig(MyBase):
@@ -63,12 +113,13 @@ class ButtonConfig(SensorBase):
     config: SensorButtonConfig
 
 class SensorBatteryConfig(MyBase):
-    alert: str
+    alert: str = None
     battery: int
     on: bool
     reachable: bool
+    offset: int = None
 
-class SensorBatteryLevel(SensorBase):
+class SensorBattery(SensorBase):
     config: SensorBatteryConfig
 
 class TempSensorState(MyBase):
@@ -81,9 +132,6 @@ class HumiditySensorState(MyBase):
 
 class TempHumiditySensor(SensorBase):
     state: Union[TempSensorState, HumiditySensorState]
-
-class SensorPing(SensorBase):
-    attr: PingAttr
 
 class DaylightSensorState(MyBase):
     dark: bool
@@ -107,13 +155,14 @@ class GroupStateChange(Base):
 
 Event = TypeAdapter(Union[
     SensorNameChange,
-    SensorButtonEvent,
+    SensorButton,
     TempHumiditySensor,
-    SensorBatteryLevel,
-    SensorPing,
+    SensorBattery,
+    Ping,
+    LightConfig,
+    LightAdded,
     ButtonConfig,
     DaylightSensor,
-    LightPing,
     LightStateChange,
     GroupStateChange,
 ])
