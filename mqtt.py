@@ -3,8 +3,10 @@ from pydantic import ValidationError
 
 from event import Event
 
+
 def on_connect(client: mqtt.Client, userdata, flags, rc):
     client.subscribe("deconz")
+
 
 def on_message(client: mqtt.Client, userdata, msg: mqtt.MQTTMessage):
     try:

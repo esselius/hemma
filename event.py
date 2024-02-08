@@ -2,14 +2,17 @@ from datetime import datetime
 from typing import Any, List, Literal, Optional, Union
 from pydantic import BaseModel, TypeAdapter
 
-class MyBase(BaseModel, extra='forbid'):
+
+class MyBase(BaseModel, extra="forbid"):
     pass
 
+
 class Base(MyBase):
-    t: Literal['event']
+    t: Literal["event"]
     r: str
     e: str
     id: int
+
 
 class PingAttr(MyBase):
     id: int
@@ -27,14 +30,17 @@ class PingAttr(MyBase):
     ctmin: Optional[int] = None
     swconfigid: Optional[str] = None
 
+
 class Ping(Base):
     attr: PingAttr
     uniqueid: str
 
+
 class LightBase(Base):
-    r: Literal['lights']
-    e: Literal['added', 'changed']
+    r: Literal["lights"]
+    e: Literal["added", "changed"]
     uniqueid: str
+
 
 class LightState(MyBase):
     alert: str
@@ -48,8 +54,10 @@ class LightState(MyBase):
     xy: Optional[List[int]] = None
     hue: Optional[int] = None
 
+
 class LightStateChange(LightBase):
     state: LightState
+
 
 class LightStartupConfig(MyBase):
     bri: Any
@@ -57,13 +65,16 @@ class LightStartupConfig(MyBase):
     on: Any
     groups: Optional[List] = None
 
+
 class LightConfig(LightBase):
     config: LightStartupConfig
+
 
 class LightCapabilities(MyBase):
     alerts: List[str]
     bri: Any
     color: Any
+
 
 class LightAddDump(MyBase):
     capabilities: LightCapabilities
@@ -85,23 +96,29 @@ class LightAddDump(MyBase):
     type: str
     uniqueid: str
 
+
 class LightAdded(LightBase):
     light: LightAddDump
 
+
 class SensorBase(Base):
-    r: Literal['sensors']
-    e: Literal['changed']
+    r: Literal["sensors"]
+    e: Literal["changed"]
     uniqueid: str
+
 
 class SensorNameChange(SensorBase):
     name: str
+
 
 class ButtonState(MyBase):
     buttonevent: int
     lastupdated: datetime
 
+
 class SensorButton(SensorBase):
     state: ButtonState
+
 
 class SensorButtonConfig(MyBase):
     clickmode: str
@@ -109,8 +126,10 @@ class SensorButtonConfig(MyBase):
     on: bool
     reachable: bool
 
+
 class ButtonConfig(SensorBase):
     config: SensorButtonConfig
+
 
 class SensorBatteryConfig(MyBase):
     alert: str = None
@@ -119,19 +138,24 @@ class SensorBatteryConfig(MyBase):
     reachable: bool
     offset: int = None
 
+
 class SensorBattery(SensorBase):
     config: SensorBatteryConfig
+
 
 class TempSensorState(MyBase):
     temperature: int
     lastupdated: datetime
 
+
 class HumiditySensorState(MyBase):
     humidity: int
     lastupdated: datetime
 
+
 class TempHumiditySensor(SensorBase):
     state: Union[TempSensorState, HumiditySensorState]
+
 
 class DaylightSensorState(MyBase):
     dark: bool
@@ -141,28 +165,34 @@ class DaylightSensorState(MyBase):
     sunset: datetime
     lastupdated: datetime
 
+
 class DaylightSensor(SensorBase):
     state: DaylightSensorState
+
 
 class GroupState(MyBase):
     all_on: bool
     any_on: bool
 
+
 class GroupStateChange(Base):
-    r: Literal['groups']
-    e: Literal['changed']
+    r: Literal["groups"]
+    e: Literal["changed"]
     state: GroupState
 
-Event = TypeAdapter(Union[
-    SensorNameChange,
-    SensorButton,
-    TempHumiditySensor,
-    SensorBattery,
-    Ping,
-    LightConfig,
-    LightAdded,
-    ButtonConfig,
-    DaylightSensor,
-    LightStateChange,
-    GroupStateChange,
-])
+
+Event = TypeAdapter(
+    Union[
+        SensorNameChange,
+        SensorButton,
+        TempHumiditySensor,
+        SensorBattery,
+        Ping,
+        LightConfig,
+        LightAdded,
+        ButtonConfig,
+        DaylightSensor,
+        LightStateChange,
+        GroupStateChange,
+    ]
+)
