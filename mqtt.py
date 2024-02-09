@@ -1,7 +1,7 @@
 import paho.mqtt.client as mqtt
 from pydantic import ValidationError
 
-from event import Event
+from events import Event
 
 
 def on_connect(client: mqtt.Client, userdata, flags, rc):

@@ -1,0 +1,19 @@
+{
+    "attr": {
+      "id": "7",
+      "lastannounced": "2024-02-09T06:24:11Z",
+      "lastseen": "2024-02-09T10:37Z",
+      "manufacturername": "IKEA of Sweden",
+      "modelid": "TRADFRI open/close remote",
+      "name": "Sovrum rullgardinsknapp",
+      "productid": "E1766",
+      "swversion": "2.3.079",
+      "type": "ZHASwitch",
+      "uniqueid": "cc:86:ec:ff:fe:9f:de:4a-01-1000"
+    },
+    "e": "changed",
+    "id": "7",
+    "r": "sensors",
+    "t": "event",
+    "uniqueid": "cc:86:ec:ff:fe:9f:de:4a-01-1000"
+  }

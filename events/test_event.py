@@ -1,10 +1,13 @@
-from event import *
-
 from pydantic_core import TzInfo
+
+from .event import *
+from .group import *
+from .sensor import *
+from .light import *
 
 
 def test_group():
-    assert GroupStateChange(
+    assert GroupChanged(
         e="changed",
         r="groups",
         t="event",
@@ -13,13 +16,13 @@ def test_group():
             all_on=False,
             any_on=False,
         ),
-    ) == Event.validate_json(open("events/group.json").read())
+    ) == Event.validate_json(open("events/fixtures/group.json").read())
 
 
 def test_group_rename():
-    assert GroupRename(
+    assert GroupChanged(
         e="changed", r="groups", t="event", id=3, name="Bibliotek"
-    ) == Event.validate_json(open("events/group_rename.json").read())
+    ) == Event.validate_json(open("events/fixtures/group_rename.json").read())
 
 
 light_changed = {
@@ -30,11 +33,11 @@ light_changed = {
 
 
 def test_light_announcement():
-    assert Heartbeat(
+    assert LightChanged(
         **light_changed,
         id=2,
         uniqueid="00:17:88:01:03:7e:3d:7e-0b",
-        attr=HeartbeatAttr(
+        attr=LightAnnouncementAttr(
             colorcapabilities=31,
             ctmax=500,
             ctmin=153,
@@ -50,7 +53,7 @@ def test_light_announcement():
             type="Extended color light",
             uniqueid="00:17:88:01:03:7e:3d:7e-0b",
         )
-    ) == Event.validate_json(open("events/light_announcement.json").read())
+    ) == Event.validate_json(open("events/fixtures/light_announcement.json").read())
 
 
 def test_light_color_added():
@@ -115,11 +118,11 @@ def test_light_color_added():
             type="Extended color light",
             uniqueid="00:17:88:01:03:7e:3d:7e-0b",
         ),
-    ) == Event.validate_json(open("events/light_color_added.json").read())
+    ) == Event.validate_json(open("events/fixtures/light_color_added.json").read())
 
 
 def test_light_config_previous():
-    assert LightConfig(
+    assert LightChanged(
         **light_changed,
         id=2,
         uniqueid="00:17:88:01:03:7e:3d:7e-0b",
@@ -128,11 +131,11 @@ def test_light_config_previous():
             color={"ct": {"startup": 366}, "xy": {"startup": "previous"}},
             on={"startup": True},
         )
-    ) == Event.validate_json(open("events/light_config_previous.json").read())
+    ) == Event.validate_json(open("events/fixtures/light_config_previous.json").read())
 
 
 def test_light_config():
-    assert LightConfig(
+    assert LightChanged(
         **light_changed,
         id=2,
         uniqueid="00:17:88:01:03:7e:3d:7e-0b",
@@ -141,11 +144,11 @@ def test_light_config():
             color={"ct": {"startup": 366}, "xy": {"startup": [0, 0.9961]}},
             on={"startup": True},
         )
-    ) == Event.validate_json(open("events/light_config.json").read())
+    ) == Event.validate_json(open("events/fixtures/light_config.json").read())
 
 
 def test_light_heartbeat():
-    assert Heartbeat(
+    assert LightChanged(
         **light_changed,
         id=3,
         uniqueid="54:ef:44:10:00:71:43:55-01",
@@ -160,11 +163,11 @@ def test_light_heartbeat():
             type="On/Off light",
             uniqueid="54:ef:44:10:00:71:43:55-01",
         )
-    ) == Event.validate_json(open("events/light_heartbeat.json").read())
+    ) == Event.validate_json(open("events/fixtures/light_heartbeat.json").read())
 
 
 def test_light_off_dimmable():
-    assert LightStateChange(
+    assert LightChanged(
         **light_changed,
         id=1,
         uniqueid="b4:e3:f9:ff:fe:de:09:0d-01",
@@ -174,11 +177,11 @@ def test_light_off_dimmable():
             on=False,
             reachable=True,
         )
-    ) == Event.validate_json(open("events/light_off_dimmable.json").read())
+    ) == Event.validate_json(open("events/fixtures/light_off_dimmable.json").read())
 
 
 def test_light_off():
-    assert LightStateChange(
+    assert LightChanged(
         **light_changed,
         id=3,
         uniqueid="54:ef:44:10:00:71:43:55-01",
@@ -187,11 +190,11 @@ def test_light_off():
             on=False,
             reachable=True,
         )
-    ) == Event.validate_json(open("events/light_off.json").read())
+    ) == Event.validate_json(open("events/fixtures/light_off.json").read())
 
 
 def test_light_color():
-    assert LightStateChange(
+    assert LightChanged(
         **light_changed,
         id=2,
         uniqueid="00:17:88:01:03:7e:3d:7e-0b",
@@ -205,12 +208,9 @@ def test_light_color():
             on=True,
             reachable=True,
             sat=140,
-            xy=[
-                0.4082,
-                0.4289
-            ]
+            xy=[0.4082, 0.4289],
         )
-    ) == Event.validate_json(open("events/light_color.json").read())
+    ) == Event.validate_json(open("events/fixtures/light_color.json").read())
 
 
 sensor_changed = {
@@ -221,7 +221,7 @@ sensor_changed = {
 
 
 def test_sensor_battery():
-    assert SensorBattery(
+    assert SensorChanged(
         **sensor_changed,
         id=7,
         uniqueid="cc:86:ec:ff:fe:9f:de:4a-01-1000",
@@ -231,33 +231,33 @@ def test_sensor_battery():
             on=True,
             reachable=True,
         )
-    ) == Event.validate_json(open("events/sensor_battery.json").read())
+    ) == Event.validate_json(open("events/fixtures/sensor_battery.json").read())
 
 
 def test_sensor_button():
-    assert SensorButton(
+    assert SensorChanged(
         **sensor_changed,
         id=7,
         uniqueid="cc:86:ec:ff:fe:9f:de:4a-01-1000",
         state=ButtonState(
             buttonevent=2003, lastupdated=datetime(2024, 2, 6, 20, 43, 35, 495000)
         )
-    ) == Event.validate_json(open("events/sensor_button.json").read())
+    ) == Event.validate_json(open("events/fixtures/sensor_button.json").read())
 
 
 def test_sensor_config():
-    assert ButtonConfig(
+    assert SensorChanged(
         **sensor_changed,
         id=3,
         uniqueid="54:ef:44:10:00:71:43:55-29-0012",
         config=SensorButtonConfig(
             clickmode="rocker", devicemode="compatibility", on=True, reachable=True
         )
-    ) == Event.validate_json(open("events/sensor_config.json").read())
+    ) == Event.validate_json(open("events/fixtures/sensor_config.json").read())
 
 
 def test_sensor_daylight():
-    assert DaylightSensor(
+    assert SensorChanged(
         **sensor_changed,
         id=1,
         uniqueid="00:21:2e:ff:ff:0c:a0:94-01",
@@ -269,11 +269,11 @@ def test_sensor_daylight():
             sunrise=datetime(2024, 2, 4, 7, 11, 9),
             sunset=datetime(2024, 2, 4, 15, 43, 23),
         )
-    ) == Event.validate_json(open("events/sensor_daylight.json").read())
+    ) == Event.validate_json(open("events/fixtures/sensor_daylight.json").read())
 
 
 def test_sensor_heartbeat():
-    assert Heartbeat(
+    assert SensorChanged(
         **sensor_changed,
         id=3,
         uniqueid="54:ef:44:10:00:71:43:55-29-0012",
@@ -288,22 +288,22 @@ def test_sensor_heartbeat():
             type="ZHASwitch",
             uniqueid="54:ef:44:10:00:71:43:55-29-0012",
         )
-    ) == Event.validate_json(open("events/sensor_heartbeat.json").read())
+    ) == Event.validate_json(open("events/fixtures/sensor_heartbeat.json").read())
 
 
 def test_sensor_humidity():
-    assert TempHumiditySensor(
+    assert SensorChanged(
         **sensor_changed,
         id=9,
         uniqueid="14:2d:41:ff:fe:2f:3c:4d-01-0405",
         state=HumiditySensorState(
             humidity=4180, lastupdated=datetime(2024, 2, 6, 21, 20, 37, 137000)
         )
-    ) == Event.validate_json(open("events/sensor_humidity.json").read())
+    ) == Event.validate_json(open("events/fixtures/sensor_humidity.json").read())
 
 
 def test_sensor_temp():
-    assert TempHumiditySensor(
+    assert SensorChanged(
         **sensor_changed,
         id=8,
         uniqueid="14:2d:41:ff:fe:2f:3c:4d-01-0402",
@@ -311,4 +311,24 @@ def test_sensor_temp():
             lastupdated=datetime(2024, 2, 6, 20, 46, 54, 35000),
             temperature=2060,
         )
-    ) == Event.validate_json(open("events/sensor_temp.json").read())
+    ) == Event.validate_json(open("events/fixtures/sensor_temp.json").read())
+
+
+def test_sensor_accouncement():
+    assert SensorChanged(
+        **sensor_changed,
+        id=7,
+        uniqueid="cc:86:ec:ff:fe:9f:de:4a-01-1000",
+        attr=HeartbeatAttr(
+            id="7",
+            lastannounced=datetime(2024,2,9,6,24,11, tzinfo=TzInfo(0)),
+            lastseen=datetime(2024,2,9,10,37,tzinfo=TzInfo(0)),
+            manufacturername="IKEA of Sweden",
+            modelid="TRADFRI open/close remote",
+            name="Sovrum rullgardinsknapp",
+            productid="E1766",
+            swversion="2.3.079",
+            type="ZHASwitch",
+            uniqueid="cc:86:ec:ff:fe:9f:de:4a-01-1000",
+        )
+    ) == Event.validate_json(open("events/fixtures/sensor_announcement.json").read())
