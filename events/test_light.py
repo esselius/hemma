@@ -263,6 +263,4 @@ def test_light_changed():
         id=4,
         uniqueid="bc:33:ac:ff:fe:12:58:3a-01",
         state=LightState(alert="none", reachable=True),
-    ) == Event.validate_json(
-        open("events/fixtures/light_changed.json").read()
-    )
+    ) == Event.validate_json(open("events/fixtures/light_changed.json").read())

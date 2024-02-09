@@ -17,7 +17,7 @@ class SensorButtonConfig(MyBase):
 
 
 class SensorBatteryConfig(MyBase):
-    alert: str
+    alert: Optional[str] = None
     battery: int
     on: bool
     reachable: bool

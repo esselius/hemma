@@ -46,6 +46,20 @@ def test_sensor_config():
     ) == Event.validate_json(open("events/fixtures/sensor_config.json").read())
 
 
+def test_sensor_config_changed():
+    assert SensorChanged(
+        **sensor_changed,
+        id=9,
+        uniqueid="14:2d:41:ff:fe:2f:3c:4d-01-0405",
+        config=SensorBatteryConfig(
+            battery=100,
+            offset=0,
+            on=True,
+            reachable=True
+        )
+    ) == Event.validate_json(open("events/fixtures/sensor_config_changed.json").read())
+
+
 def test_sensor_daylight():
     assert SensorChanged(
         **sensor_changed,
