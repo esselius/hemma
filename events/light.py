@@ -5,7 +5,7 @@ from .common import Base, MyBase, HeartbeatAttr
 
 class LightState(MyBase):
     alert: str
-    on: bool
+    on: Optional[bool] = None
     reachable: bool
     bri: Optional[int] = None
     colormode: Optional[str] = None
@@ -25,16 +25,16 @@ class LightStartupConfig(MyBase):
 
 class LightCapabilities(MyBase):
     alerts: List[str]
-    bri: Any
-    color: Any
+    bri: Optional[Any] = None
+    color: Optional[Any] = None
 
 
 class LightAddDump(MyBase):
     capabilities: LightCapabilities
-    colorcapabilities: int
-    config: LightStartupConfig
-    ctmax: int
-    ctmin: int
+    colorcapabilities: Optional[int] = None
+    config: Optional[LightStartupConfig] = None
+    ctmax: Optional[int] = None
+    ctmin: Optional[int] = None
     etag: str
     hascolor: bool
     lastannounced: Optional[datetime]
@@ -44,7 +44,7 @@ class LightAddDump(MyBase):
     name: str
     productid: Optional[str]
     state: LightState
-    swconfigid: Optional[str]
+    swconfigid: Optional[str] = None
     swversion: Optional[str]
     type: str
     uniqueid: str

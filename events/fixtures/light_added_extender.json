@@ -1,0 +1,31 @@
+{
+    "e": "added",
+    "id": "4",
+    "light": {
+        "capabilities": {
+            "alerts": [
+                "none",
+                "select",
+                "lselect"
+            ]
+        },
+        "etag": "ccf6ed6fc470e4c1fd46b9646cc54b5e",
+        "hascolor": false,
+        "lastannounced": null,
+        "lastseen": "2024-02-09T11:30Z",
+        "manufacturername": "IKEA of Sweden",
+        "modelid": "TRADFRI Signal Repeater",
+        "name": "Range extender 4",
+        "productid": null,
+        "state": {
+            "alert": "none",
+            "reachable": false
+        },
+        "swversion": null,
+        "type": "Range extender",
+        "uniqueid": "bc:33:ac:ff:fe:12:58:3a-01"
+    },
+    "r": "lights",
+    "t": "event",
+    "uniqueid": "bc:33:ac:ff:fe:12:58:3a-01"
+}

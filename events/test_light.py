@@ -3,6 +3,11 @@ from pydantic_core import TzInfo
 from . import Event
 from .light import *
 
+light_added = {
+    "e": "added",
+    "t": "event",
+    "r": "lights",
+}
 
 light_changed = {
     "e": "changed",
@@ -37,9 +42,7 @@ def test_light_announcement():
 
 def test_light_color_added():
     assert LightAdded(
-        e="added",
-        t="event",
-        r="lights",
+        **light_added,
         id=2,
         uniqueid="00:17:88:01:03:7e:3d:7e-0b",
         light=LightAddDump(
@@ -190,3 +193,26 @@ def test_light_color():
             xy=[0.4082, 0.4289],
         )
     ) == Event.validate_json(open("events/fixtures/light_color.json").read())
+
+
+def test_light_added_extender():
+    assert LightAdded(
+        **light_added,
+        id=4,
+        uniqueid="bc:33:ac:ff:fe:12:58:3a-01",
+        light=LightAddDump(
+            capabilities=LightCapabilities(alerts=["none", "select", "lselect"]),
+            etag="ccf6ed6fc470e4c1fd46b9646cc54b5e",
+            hascolor=False,
+            lastannounced=None,
+            lastseen="2024-02-09T11:30Z",
+            manufacturername="IKEA of Sweden",
+            modelid="TRADFRI Signal Repeater",
+            name="Range extender 4",
+            productid=None,
+            state=LightState(alert="none", reachable=False),
+            swversion=None,
+            type="Range extender",
+            uniqueid="bc:33:ac:ff:fe:12:58:3a-01",
+        )
+    ) == Event.validate_json(open("events/fixtures/light_added_extender.json").read())
