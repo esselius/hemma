@@ -2,7 +2,6 @@ from typing import Literal, Optional
 from .common import Base, MyBase
 
 
-
 class GroupState(MyBase):
     all_on: bool
     any_on: bool
