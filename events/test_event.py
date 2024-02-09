@@ -1,6 +1,6 @@
 from pydantic_core import TzInfo
 
-from .event import *
+from . import Event
 from .group import *
 from .sensor import *
 from .light import *
