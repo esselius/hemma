@@ -67,6 +67,7 @@ class LightChanged(LightBase):
     attr: Optional[Union[HeartbeatAttr, LightAnnouncementAttr]] = None
     state: Optional[LightState] = None
     config: Optional[LightStartupConfig] = None
+    capabilities: Optional[LightCapabilities] = None
 
 
 class LightAdded(LightBase):

@@ -1,0 +1,14 @@
+{
+    "capabilities": {
+        "alerts": [
+            "none",
+            "select",
+            "lselect"
+        ]
+    },
+    "e": "changed",
+    "id": "5",
+    "r": "lights",
+    "t": "event",
+    "uniqueid": "bc:33:ac:ff:fe:12:58:3a-01"
+}

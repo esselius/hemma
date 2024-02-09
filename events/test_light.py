@@ -235,3 +235,17 @@ def test_light_announcement_extender():
             uniqueid="bc:33:ac:ff:fe:12:58:3a-01"
         )
     ) == Event.validate_json(open("events/fixtures/light_announcement_extender.json").read())
+
+def test_light_changed_capabilities():
+    assert LightChanged(
+        **light_changed,
+        id=5,
+        uniqueid="bc:33:ac:ff:fe:12:58:3a-01",
+        capabilities=LightCapabilities(
+            alerts = [
+                "none",
+                "select",
+                "lselect",
+            ]
+        )
+    ) == Event.validate_json(open("events/fixtures/light_changed_capabilities.json").read())
