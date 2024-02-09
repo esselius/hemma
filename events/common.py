@@ -19,7 +19,7 @@ class HeartbeatAttr(MyBase):
     manufacturername: str
     modelid: str
     name: str
-    swversion: str
+    swversion: Optional[str]
     type: str
     uniqueid: str
     productid: Optional[str] = None

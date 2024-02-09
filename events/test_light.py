@@ -216,3 +216,22 @@ def test_light_added_extender():
             uniqueid="bc:33:ac:ff:fe:12:58:3a-01",
         )
     ) == Event.validate_json(open("events/fixtures/light_added_extender.json").read())
+
+def test_light_announcement_extender():
+    assert LightChanged(
+        **light_changed,
+        id=5,
+        uniqueid="bc:33:ac:ff:fe:12:58:3a-01",
+        attr=HeartbeatAttr(
+            id="5",
+            lastannounced=None,
+            lastseen=datetime(2024, 2, 9, 11, 35, tzinfo=TzInfo(0)),
+            manufacturername="IKEA of Sweden",
+            modelid="TRADFRI Signal Repeater",
+            name="Range extender 5",
+            productid=None,
+            swversion=None,
+            type="Range extender",
+            uniqueid="bc:33:ac:ff:fe:12:58:3a-01"
+        )
+    ) == Event.validate_json(open("events/fixtures/light_announcement_extender.json").read())

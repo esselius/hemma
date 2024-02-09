@@ -1,0 +1,19 @@
+{
+    "attr": {
+        "id": "5",
+        "lastannounced": null,
+        "lastseen": "2024-02-09T11:35Z",
+        "manufacturername": "IKEA of Sweden",
+        "modelid": "TRADFRI Signal Repeater",
+        "name": "Range extender 5",
+        "productid": null,
+        "swversion": null,
+        "type": "Range extender",
+        "uniqueid": "bc:33:ac:ff:fe:12:58:3a-01"
+    },
+    "e": "changed",
+    "id": "5",
+    "r": "lights",
+    "t": "event",
+    "uniqueid": "bc:33:ac:ff:fe:12:58:3a-01"
+}
