@@ -36,7 +36,7 @@ def test_light_announcement():
             swversion="1.108.7",
             type="Extended color light",
             uniqueid="00:17:88:01:03:7e:3d:7e-0b",
-        )
+        ),
     ) == Event.validate_json(open("events/fixtures/light_announcement.json").read())
 
 
@@ -112,7 +112,7 @@ def test_light_config_previous():
             bri={"startup": 254},
             color={"ct": {"startup": 366}, "xy": {"startup": "previous"}},
             on={"startup": True},
-        )
+        ),
     ) == Event.validate_json(open("events/fixtures/light_config_previous.json").read())
 
 
@@ -125,7 +125,7 @@ def test_light_config():
             bri={"startup": 254},
             color={"ct": {"startup": 366}, "xy": {"startup": [0, 0.9961]}},
             on={"startup": True},
-        )
+        ),
     ) == Event.validate_json(open("events/fixtures/light_config.json").read())
 
 
@@ -144,7 +144,7 @@ def test_light_heartbeat():
             swversion="0.0.0_0024",
             type="On/Off light",
             uniqueid="54:ef:44:10:00:71:43:55-01",
-        )
+        ),
     ) == Event.validate_json(open("events/fixtures/light_heartbeat.json").read())
 
 
@@ -158,7 +158,7 @@ def test_light_off_dimmable():
             bri=254,
             on=False,
             reachable=True,
-        )
+        ),
     ) == Event.validate_json(open("events/fixtures/light_off_dimmable.json").read())
 
 
@@ -171,7 +171,7 @@ def test_light_off():
             alert="none",
             on=False,
             reachable=True,
-        )
+        ),
     ) == Event.validate_json(open("events/fixtures/light_off.json").read())
 
 
@@ -191,7 +191,7 @@ def test_light_color():
             reachable=True,
             sat=140,
             xy=[0.4082, 0.4289],
-        )
+        ),
     ) == Event.validate_json(open("events/fixtures/light_color.json").read())
 
 
@@ -214,8 +214,9 @@ def test_light_added_extender():
             swversion=None,
             type="Range extender",
             uniqueid="bc:33:ac:ff:fe:12:58:3a-01",
-        )
+        ),
     ) == Event.validate_json(open("events/fixtures/light_added_extender.json").read())
+
 
 def test_light_announcement_extender():
     assert LightChanged(
@@ -232,9 +233,12 @@ def test_light_announcement_extender():
             productid=None,
             swversion=None,
             type="Range extender",
-            uniqueid="bc:33:ac:ff:fe:12:58:3a-01"
-        )
-    ) == Event.validate_json(open("events/fixtures/light_announcement_extender.json").read())
+            uniqueid="bc:33:ac:ff:fe:12:58:3a-01",
+        ),
+    ) == Event.validate_json(
+        open("events/fixtures/light_announcement_extender.json").read()
+    )
+
 
 def test_light_changed_capabilities():
     assert LightChanged(
@@ -242,10 +246,23 @@ def test_light_changed_capabilities():
         id=5,
         uniqueid="bc:33:ac:ff:fe:12:58:3a-01",
         capabilities=LightCapabilities(
-            alerts = [
+            alerts=[
                 "none",
                 "select",
                 "lselect",
             ]
-        )
-    ) == Event.validate_json(open("events/fixtures/light_changed_capabilities.json").read())
+        ),
+    ) == Event.validate_json(
+        open("events/fixtures/light_changed_capabilities.json").read()
+    )
+
+
+def test_light_changed():
+    assert LightChanged(
+        **light_changed,
+        id=4,
+        uniqueid="bc:33:ac:ff:fe:12:58:3a-01",
+        state=LightState(alert="none", reachable=True),
+    ) == Event.validate_json(
+        open("events/fixtures/light_changed.json").read()
+    )
