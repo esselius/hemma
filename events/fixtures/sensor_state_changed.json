@@ -1,0 +1,11 @@
+{
+    "e": "changed",
+    "id": "18",
+    "r": "sensors",
+    "state": {
+        "lastupdated": "2024-02-21T20:59:41.639",
+        "status": 1
+    },
+    "t": "event",
+    "uniqueid": "fsm-state-1708549147962"
+}

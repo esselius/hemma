@@ -1,0 +1,32 @@
+{
+    "e": "added",
+    "id": "16",
+    "r": "sensors",
+    "sensor": {
+        "config": {
+            "battery": null,
+            "enrolled": 3,
+            "on": true,
+            "pending": [],
+            "reachable": true
+        },
+        "ep": 1,
+        "etag": "e934aa1059eb41fe774cd973ff99d30e",
+        "id": "16",
+        "lastannounced": null,
+        "lastseen": "2024-02-21T20:35Z",
+        "manufacturername": "eWeLink",
+        "modelid": "DS01",
+        "name": "OpenClose 16",
+        "state": {
+            "lastupdated": "none",
+            "lowbattery": false,
+            "open": false,
+            "tampered": false
+        },
+        "type": "ZHAOpenClose",
+        "uniqueid": "00:12:4b:00:29:34:93:4e-01-0500"
+    },
+    "t": "event",
+    "uniqueid": "00:12:4b:00:29:34:93:4e-01-0500"
+}

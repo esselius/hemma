@@ -264,3 +264,82 @@ def test_sensor_power_consumption():
     ) == Event.validate_json(
         open("events/fixtures/sensor_power_consumption.json").read()
     )
+
+
+def test_sensor_power_consumption():
+    assert SensorAdded(
+        e="added",
+        t="event",
+        r="sensors",
+        id=16,
+        uniqueid="00:12:4b:00:29:34:93:4e-01-0500",
+        sensor=SensorAddDump(
+            config=SensorBatteryConfig(
+                battery=None,
+                enrolled=3,
+                on=True,
+                pending=[],
+                reachable=True,
+            ),
+            ep=1,
+            etag="e934aa1059eb41fe774cd973ff99d30e",
+            id=16,
+            lastannounced=None,
+            lastseen=datetime(2024, 2, 21, 20, 35, tzinfo=TzInfo(0)),
+            manufacturername="eWeLink",
+            modelid="DS01",
+            name="OpenClose 16",
+            state=DoorSensorState(
+                lastupdated="none",
+                lowbattery=False,
+                open=False,
+                tampered=False,
+            ),
+            type="ZHAOpenClose",
+            uniqueid="00:12:4b:00:29:34:93:4e-01-0500",
+        ),
+    ) == Event.validate_json(open("events/fixtures/sensor_door_added.json").read())
+
+
+def test_sensor_power_consumption():
+    assert SensorChanged(
+        e="changed",
+        t="event",
+        r="sensors",
+        id=17,
+        uniqueid="00:12:4b:00:29:34:93:4e-01-0500",
+        state=DoorSensorState(
+            lastupdated=datetime(2024, 2, 21, 20, 55, 19, 589000),
+            lowbattery=False,
+            open=False,
+            tampered=False,
+        ),
+    ) == Event.validate_json(open("events/fixtures/sensor_door_changed.json").read())
+
+
+def test_sensor_state_changed():
+    assert SensorChanged(
+        e="changed",
+        t="event",
+        r="sensors",
+        id=18,
+        uniqueid="fsm-state-1708549147962",
+        state=VirtualSensorState(
+            lastupdated=datetime(2024, 2, 21, 20, 59, 41, 639000),
+            status=1,
+        ),
+    ) == Event.validate_json(open("events/fixtures/sensor_state_changed.json").read())
+
+
+def test_sensor_presence():
+    assert SensorChanged(
+        e="changed",
+        t="event",
+        r="sensors",
+        id=19,
+        uniqueid="vpir-1708549147962",
+        state=VirtualSensorState(
+            lastupdated=datetime(2024, 2, 21, 21, 0, 41, 228000),
+            presence=False,
+        ),
+    ) == Event.validate_json(open("events/fixtures/sensor_presence.json").read())

@@ -19,11 +19,13 @@ class SensorButtonConfig(MyBase):
 
 class SensorBatteryConfig(MyBase):
     alert: Optional[str] = None
-    battery: int
+    battery: Optional[int]
     on: bool
     reachable: Optional[bool]
     offset: Optional[int] = None
     group: Optional[int] = None
+    enrolled: Optional[int] = None
+    pending: Optional[List] = None
 
 
 class TempSensorState(MyBase):
@@ -57,6 +59,19 @@ class PowerSensorConsumptionState(MyBase):
     lastupdated: datetime
 
 
+class DoorSensorState(MyBase):
+    lastupdated: Union[datetime, Literal["none"]]
+    lowbattery: bool
+    open: bool
+    tampered: bool
+
+
+class VirtualSensorState(MyBase):
+    lastupdated: Union[datetime, Literal["none"]]
+    status: Optional[int] = None
+    presence: Optional[bool] = None
+
+
 class SensorAddDump(MyBase):
     id: int
     config: SensorBatteryConfig
@@ -64,13 +79,14 @@ class SensorAddDump(MyBase):
     lastannounced: Optional[datetime]
     lastseen: datetime
     manufacturername: str
-    mode: int
+    mode: Optional[int] = None
     modelid: str
     name: str
-    productname: str
-    state: ButtonState
+    productname: Optional[str] = None
+    state: Union[ButtonState, DoorSensorState]
     type: str
-    uniqueid: str
+    uniqueid: Optional[str] = None
+    ep: Optional[int] = None
 
 
 class SensorBase(Base):
@@ -89,6 +105,8 @@ class SensorChanged(SensorBase):
             DaylightSensorState,
             PowerSensorState,
             PowerSensorConsumptionState,
+            DoorSensorState,
+            VirtualSensorState,
         ]
     ] = None
     attr: Optional[HeartbeatAttr] = None

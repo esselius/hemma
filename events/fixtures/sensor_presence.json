@@ -1,0 +1,11 @@
+{
+    "e": "changed",
+    "id": "19",
+    "r": "sensors",
+    "state": {
+        "lastupdated": "2024-02-21T21:00:41.228",
+        "presence": false
+    },
+    "t": "event",
+    "uniqueid": "vpir-1708549147962"
+}
