@@ -1,0 +1,31 @@
+{
+    "e": "added",
+    "id": "12",
+    "r": "sensors",
+    "sensor": {
+        "config": {
+            "battery": 0,
+            "group": "20001",
+            "on": true,
+            "reachable": null
+        },
+        "etag": "14c7fa40750af4f590a673dbbc436a38",
+        "id": "12",
+        "lastannounced": null,
+        "lastseen": "2024-02-09T13:58Z",
+        "manufacturername": "Philips",
+        "mode": 1,
+        "modelid": "RWL021",
+        "name": "Switch 12",
+        "productname": "Hue dimmer switch",
+        "state": {
+            "buttonevent": null,
+            "eventduration": null,
+            "lastupdated": "none"
+        },
+        "type": "ZHASwitch",
+        "uniqueid": "00:17:88:01:04:f0:84:1f-02-fc00"
+    },
+    "t": "event",
+    "uniqueid": "00:17:88:01:04:f0:84:1f-02-fc00"
+}

@@ -1,0 +1,13 @@
+{
+    "config": {
+        "battery": 0,
+        "group": "20001",
+        "on": true,
+        "reachable": true
+    },
+    "e": "changed",
+    "id": "12",
+    "r": "sensors",
+    "t": "event",
+    "uniqueid": "00:17:88:01:04:f0:84:1f-02-fc00"
+}

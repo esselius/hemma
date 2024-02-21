@@ -23,3 +23,4 @@ class HeartbeatAttr(MyBase):
     type: str
     uniqueid: str
     productid: Optional[str] = None
+    productname: Optional[str] = None

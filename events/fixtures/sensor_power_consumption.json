@@ -1,0 +1,11 @@
+{
+    "e": "changed",
+    "id": "14",
+    "r": "sensors",
+    "state": {
+        "consumption": 0,
+        "lastupdated": "2024-02-21T20:00:47.609"
+    },
+    "t": "event",
+    "uniqueid": "a4:c1:38:00:47:d4:5d:fa-01-0702"
+}

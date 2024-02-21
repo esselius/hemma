@@ -1,0 +1,13 @@
+{
+    "e": "changed",
+    "id": "15",
+    "r": "sensors",
+    "state": {
+        "current": 507,
+        "lastupdated": "2024-02-21T19:53:13.560",
+        "power": 0,
+        "voltage": 233
+    },
+    "t": "event",
+    "uniqueid": "a4:c1:38:00:47:d4:5d:fa-01-0b04"
+}
